@@ -1,0 +1,65 @@
+<h1 mat-dialog-title>{{tituloAccion}} Empleado</h1>
+<div mat-dialog-content>
+  <form [formGroup]="formEmpleado">
+    <mat-grid-list cols="1" rowHeight="80px">
+      <mat-grid-tile>
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre Completo </mat-label>
+          <input matInput formControlName="nombreCompleto" placeholder="Ingrese su nombre completo">
+          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+          <mat-hint>Hint</mat-hint>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-form-field>
+          <mat-label>Departamento</mat-label>
+          <mat-select formControlName="idDepartamento">
+            <mat-option *ngFor="let iten of listaDepartamentos"[value]="iten.idDepartamento">
+              {{iten.nombre}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-form-field>
+          <mat-label>Cargo</mat-label>
+          <mat-select formControlName="idCargo">
+            <mat-option *ngFor="let iten of listaCargos"[value]="iten.idCargo">
+              {{iten.nombre}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-form-field appearance="outline">
+          <mat-label>Sueldo </mat-label>
+          <input matInput formControlName="sueldo" placeholder="Ingrese un monto">
+          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+          <mat-hint>Hint</mat-hint>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-form-field appearance="outline">
+          <mat-label>Estado </mat-label>
+          <input matInput formControlName="estado"  placeholder="Ingrese el estado">
+          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+          <mat-hint>Hint</mat-hint>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-form-field>
+          <mat-label>Fecha Contrato</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="fechaContrato" placeholder="fecha">
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </mat-grid-tile>
+    </mat-grid-list>
+    \
+
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-button mat-dialog-close cdkFocusInitial (click)="addEditEmpleado()" [disabled]="formEmpleado.invalid">{{botonAccion}}Guardar</button>
+</div>

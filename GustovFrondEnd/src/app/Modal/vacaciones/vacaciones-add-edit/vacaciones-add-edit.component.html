@@ -1,0 +1,35 @@
+<h1 mat-dialog-title>{{tituloAccion}} Vacacion</h1>
+<div mat-dialog-content>
+  <form [formGroup]="formVacacion">
+    <mat-grid-list cols="1" rowHeight="80px">
+      <mat-grid-tile>
+        <mat-form-field appearance="outline">
+          <mat-label>Detalle </mat-label>
+          <input matInput formControlName="detalle" placeholder="Ingrese el detalle">
+          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+          <mat-hint>Hint</mat-hint>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-form-field>
+          <mat-label>Fecha Inicio Vacacion</mat-label>
+          <input matInput [matDatepicker]="pickerInicio" formControlName="fechaInicio" placeholder="fecha1">
+          <mat-datepicker-toggle matIconSuffix [for]="pickerInicio"></mat-datepicker-toggle>
+          <mat-datepicker #pickerInicio></mat-datepicker>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-form-field>
+          <mat-label>Fecha Fin vacacion</mat-label>
+          <input matInput [matDatepicker]="pickerFin" formControlName="fechaFin" placeholder="fecha2">
+          <mat-datepicker-toggle matIconSuffix [for]="pickerFin"></mat-datepicker-toggle>
+          <mat-datepicker #pickerFin></mat-datepicker>
+        </mat-form-field>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-button mat-dialog-close cdkFocusInitial (click)="addEditVacacion()" >{{botonAccion}}Guardar</button>
+</div>

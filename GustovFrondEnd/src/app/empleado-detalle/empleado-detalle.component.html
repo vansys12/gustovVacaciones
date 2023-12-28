@@ -1,0 +1,18 @@
+
+<div *ngIf="empleadoDetalle">
+  <h2>{{ empleadoDetalle.nombreCompleto }}</h2>
+  <p>ID de Empleado: {{ empleadoDetalle.idEmpleado }}</p>
+  <p>Días de Vacaciones Disponibles: {{ empleadoDetalle.diasVacaciones }}</p>
+  <p>Días de Vacaciones Tomados: {{ empleadoDetalle.diasTomados }}</p>
+
+  <h3>Lista de Vacaciones:</h3>
+  <ul>
+    <li *ngFor="let vacacion of empleadoDetalle.vacaciones">
+      <p>Fecha de Inicio: {{ vacacion.fechaInicio }}</p>
+      <p>Fecha de Fin: {{ vacacion.fechaFin }}</p>
+      <p>Estado: {{ vacacion.estado }}</p>
+      <p>Gestión: {{ vacacion.gestion }}</p>
+    </li>
+  </ul>
+</div>
+
