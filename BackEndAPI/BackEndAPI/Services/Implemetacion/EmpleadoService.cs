@@ -1,16 +1,21 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using BackEndAPI.Models;
 using BackEndAPI.Services.Contrato;
+using BackEndAPI.DTOs;
+using AutoMapper;
 
 namespace BackEndAPI.Services.Implemetacion
 {
     public class EmpleadoService : IEmpleadoService
     {
         private DbgustovContext _dbContext;
+        private readonly IMapper _mapper;
 
-        public EmpleadoService(DbgustovContext dbContext)
+        public EmpleadoService(DbgustovContext dbContext, IMapper mapper)
         {
                 _dbContext=dbContext;
+                _mapper = mapper;
+
         }
 
         public async Task<List<Empleado>> GetList()
@@ -201,6 +206,32 @@ namespace BackEndAPI.Services.Implemetacion
             }
 
             return false;
+        }
+
+        public async Task<EmpleadoDTO> GetEmpleadoConVacaciones(int idEmpleado)
+        {
+            try
+            {
+                // Obtener el empleado por su ID incluyendo las vacaciones
+                var empleado = await _dbContext.Empleados
+                    .Include(e => e.Vacacions)
+                    .SingleOrDefaultAsync(e => e.IdEmpleado == idEmpleado);
+
+                if (empleado == null)
+                {
+                    return null; 
+                }
+
+                // Mapear el empleado a EmpleadoDto
+                var empleadoDto = _mapper.Map<EmpleadoDTO>(empleado);
+
+                return empleadoDto;
+            }
+            catch (Exception ex)
+            {
+                // Manejo de excepciones
+                throw ex;
+            }
         }
 
         //public async Task<int> CalcularDiasVacaciones(int idEmpleado)

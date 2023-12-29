@@ -25,6 +25,7 @@ import { VacacionesAddEditComponent } from './Modal/vacaciones/vacaciones-add-ed
 import { EmpleadoDetalleComponent } from './empleado-detalle/empleado-detalle.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
+import { EmpleadoComponent } from './empleado/empleado.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { RouterModule } from '@angular/router';
     AppComponent,
     DialogAddEditComponent,
     VacacionesAddEditComponent,
-    EmpleadoDetalleComponent
+    EmpleadoDetalleComponent,
+    EmpleadoComponent
   ],
   imports: [
     BrowserModule,

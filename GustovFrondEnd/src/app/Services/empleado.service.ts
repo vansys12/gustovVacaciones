@@ -13,7 +13,7 @@ export class EmpleadoService {
   constructor(private http:HttpClient) { }
 
   get(idEmpleado:number):Observable<Empleado>{
-    return this.http.get<Empleado>(`${this.apiUrl}/empleado/${idEmpleado}`);
+    return this.http.get<Empleado>(`${this.apiUrl}empleado/${idEmpleado}`);
   }
 
   getList():Observable<Empleado[]>{

@@ -2,19 +2,21 @@ import {AfterViewInit, Component, ViewChild, OnInit, Inject} from '@angular/core
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 
-import { Empleado } from './Interfaces/empleado';
-import { EmpleadoService } from './Services/empleado.service';
+import { Empleado } from '../Interfaces/empleado';
+import { EmpleadoService } from '../Services/empleado.service';
 
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { DialogAddEditComponent } from './Modal/dialog-add-edit/dialog-add-edit.component';
-import { VacacionesAddEditComponent } from './Modal/vacaciones/vacaciones-add-edit/vacaciones-add-edit.component';
+import { DialogAddEditComponent } from '../Modal/dialog-add-edit/dialog-add-edit.component';
+import { VacacionesAddEditComponent } from '../Modal/vacaciones/vacaciones-add-edit/vacaciones-add-edit.component';
 import { Router } from '@angular/router';
+
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-empleado',
+  templateUrl: './empleado.component.html',
+  styleUrls: ['./empleado.component.css']
 })
-export class AppComponent implements AfterViewInit, OnInit{
+export class EmpleadoComponent implements OnInit {
+
   displayedColumns: string[] = ['NombreCompleto', 'Departamento','Cargo', 'Sueldo','Estado', 'FechaContrato','Acciones'];
   dataSource = new MatTableDataSource<Empleado>();
   constructor(
@@ -43,7 +45,7 @@ export class AppComponent implements AfterViewInit, OnInit{
   mostrarEmpleados(){
     this._empleadoServicio.getList().subscribe({
       next:(dataResponse)=>{
-       // console.log(dataResponse)
+        console.log(dataResponse)
         this.dataSource.data = dataResponse;
       },error:(e)=>{}
     })
@@ -84,5 +86,3 @@ export class AppComponent implements AfterViewInit, OnInit{
   }
 
 }
-
-

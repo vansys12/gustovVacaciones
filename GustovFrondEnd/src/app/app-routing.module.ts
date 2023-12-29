@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { EmpleadoDetalleComponent } from './empleado-detalle/empleado-detalle.component';
+import {EmpleadoComponent} from './empleado/empleado.component';
 
 const routes: Routes = [
-  { path: '', component: AppComponent },
+  { path: '', component: EmpleadoComponent },
   { path: 'detalle-empleado/:id', component: EmpleadoDetalleComponent }, // Ruta para mostrar detalles de empleados con un parámetro 'id'
 
 ];
@@ -14,8 +15,9 @@ const routes: Routes = [
 
 @NgModule({
 
-  exports: [RouterModule],
-  imports: [RouterModule.forRoot(routes)]
+
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 
 })
 export class AppRoutingModule { }

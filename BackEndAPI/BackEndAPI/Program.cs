@@ -142,6 +142,28 @@ app.MapGet("/empleado/{idEmpleado}", async (
         return Results.Problem("Error interno del servidor: " + ex.Message);
     }
 });
+
+//get Detalle vacacion empleado
+app.MapGet("/vacacion/{idEmpleado}", async (
+    int idEmpleado,
+    IVacacionService _vServicio) =>
+{
+    try
+    {
+        var vacacion = await _vServicio.Get(idEmpleado);
+
+        if (vacacion is null)
+        {
+            return Results.NotFound("Empleado no encontrado.");
+        }
+
+        return Results.Ok(vacacion);
+    }
+    catch (Exception ex)
+    {
+        return Results.Problem("Error interno del servidor: " + ex.Message);
+    }
+});
 //post Vacacion
 app.MapPost("/vacacion/guardar", async (
     VacacionDTO modelo,

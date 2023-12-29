@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using BackEndAPI.Models;
 
 namespace BackEndAPI.Models;
@@ -21,7 +22,7 @@ public partial class Vacacion
     public string? Gestion { get; set; }
 
     public DateTime? FechaCreacion { get; set; }
-
+    [JsonIgnore]
     public virtual Empleado? IdEmpleadoNavigation { get; set; }
 
     public int CalcularDiasDeVacaciones()

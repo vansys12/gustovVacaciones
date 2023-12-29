@@ -3,6 +3,9 @@ using BackEndAPI.Models;
 using BackEndAPI.Services.Contrato;
 using Microsoft.AspNetCore.Routing.Tree;
 using Microsoft.AspNetCore.Mvc;
+using AutoMapper.QueryableExtensions;
+using BackEndAPI.DTOs;
+using AutoMapper;
 
 namespace BackEndAPI.Services.Implemetacion
 {
@@ -10,9 +13,11 @@ namespace BackEndAPI.Services.Implemetacion
     {
 
         private DbgustovContext _dbcontext;
+        
         public VacacionService(DbgustovContext dbcontext)
         {
             _dbcontext = dbcontext;
+            
         }
 
         public async Task<List<Vacacion>> GetList()
@@ -29,18 +34,42 @@ namespace BackEndAPI.Services.Implemetacion
                 throw ex;
             }
         }
-        public async Task<Vacacion> Get(int idVacacion)
+        //public async Task<Vacacion> Get(int idVacacion)
+        //{
+        //    try
+        //    {
+        //        Vacacion? encontrado = new Vacacion();
+        //        encontrado = await _dbcontext.Vacacions.Include(mpl => mpl.IdEmpleadoNavigation)
+        //            .Where(e => e.IdVacaciones == idVacacion).FirstOrDefaultAsync();
+        //        return encontrado;
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        throw ex;
+        //    }
+        //}
+
+        public async Task<Empleado> Get(int idEmpleado)
         {
             try
             {
-                Vacacion? encontrado = new Vacacion();
-                encontrado = await _dbcontext.Vacacions.Include(mpl => mpl.IdEmpleadoNavigation)
-                    .Where(e => e.IdVacaciones == idVacacion).FirstOrDefaultAsync();
-                return encontrado;
+                
+                var empleado = await _dbcontext.Empleados
+                    .Include(e => e.Vacacions) // Incluir la lista de vacaciones
+                    .FirstOrDefaultAsync(e => e.IdEmpleado == idEmpleado);
+
+                if (empleado == null)
+                {
+                    // Manejar el caso en el que el empleado no se encuentra
+                    return null;
+                }
+
+                return empleado;
             }
             catch (Exception ex)
             {
-
+                // Manejo de excepciones
                 throw ex;
             }
         }
@@ -116,6 +145,6 @@ namespace BackEndAPI.Services.Implemetacion
             }
         }
 
-
+       
     }
 }
